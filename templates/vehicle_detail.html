@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="vehicle-entry">
+  <h2>{{ object.name }}</h2>
+  </div>
+  <p><a href="{% url 'vehicle_edit' vehicle.pk %}">Edit</a> | <a href="{% url 'vehicle_delete' vehicle.pk %}">Delete</a></p>
+  <p>Back to <a href="{% url 'vehicle_list' %}">All Vehicles</a>.</p>
+{% endblock content %}
