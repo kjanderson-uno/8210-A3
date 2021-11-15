@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Client(models.Model):
-    customer_id = models.CharField(max_length=50, blank=True, null=True, default='00000')
+    customer_id = models.CharField(max_length=50, blank=True, default='00000')
     first_name = models.CharField(max_length=50, blank=False, null=False, default=' ')
     last_name = models.CharField(max_length=50, blank=False, null=False, default=' ')
     phone_number = models.CharField(max_length=50, default='(402)000-0000')

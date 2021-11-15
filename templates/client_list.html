@@ -3,21 +3,37 @@
 {% block title %}Clients{% endblock title %}
 
 {% block content %}
-  {% for client in object_list %}
-    <div class="card">
-      <div class="card-header">
-        <span class="font-weight-bold">{{ client.first_name }}</span>
-        <span class="font-weight-bold">{{ client.last_name }}</span>
-        <span class="font-weight-bold">cell: {{ client.phone_number }} | </span>
-        <span class="font-weight-bold">acct: {{ client.customer_id }} | </span>
+  {% if user.is_authenticated %}
+    {% for client in object_list %}
+      <div class="card">
+        <div class="card-header">
+          <span class="font-weight-bold">{{ client.first_name }}</span>
+          <span class="font-weight-bold">{{ client.last_name }}</span>
+          <span class="font-weight-bold">cell: {{ client.phone_number }} | </span>
+          <span class="font-weight-bold">acct: {{ client.customer_id }} | </span>
+          <span class="font-weight-bold">{{ client.last_name }} | </span>
+          <span class="font-weight-bold">{{ client.phone_number }} | </span>
+          <span class="font-weight-bold">Acct: {{ client.customer_id }} | </span>
 
-        <span class="font-muted">addr: {{ client.address }} | </span>
-        <span class="font-muted-">city: {{ client.city }} | </span>
-        <span class="font-muted">st: {{ client.state }} | </span>
-        <span class="font-muted">zip: {{ client.zipcode }} | </span>
-        <span class="font-muted">email: {{ client.email }} | </span>
+          <span class="font-muted">addr: {{ client.address }} | </span>
+          <span class="font-muted-">city: {{ client.city }} | </span>
+          <span class="font-muted">st: {{ client.state }} | </span>
+          <span class="font-muted">zip: {{ client.zipcode }} | </span>
+          <span class="font-muted">email: {{ client.email }} | </span>
+          <span class="font-muted">{{ client.address }} | </span>
+          <span class="font-muted-">{{ client.city }}, </span>
+          <span class="font-muted">{{ client.state }}</span>
+          <span class="font-muted">{{ client.zipcode }} </span>
+          <span class="font-weight-bold">| {{ client.email }} | </span>
+        </div>
+        <div>
+          <a href="{% url 'client_edit' pk=client.pk %}" class="btn btn-warning">Edit</a>
+          <a href="{% url 'client_delete' pk=client.pk %}"
+             onclick="return confirm('Are you sure you want to delete customer {{ client.first_name }} {{ client.last_name }}?')"
+                class="btn btn-danger">Delete</a>
+        </div>
       </div>
-    </div>
-    <br />
-  {% endfor %}
+      <br />
+    {% endfor %}
+  {% endif %}
 {% endblock content %}

@@ -1,9 +1,10 @@
-{% extends 'base.html' %}
+{% block body_block %}
+    <h1>Delete {{ vehicle.year_manufactured }} {{ vehicle.make }} {{ vehicle.model }}?</h1>
 
-{% block content %}
-    <h1>Delete</h1>
-    <form action="" method="post">{% csrf_token %}
-      <p>Are you sure you want to delete "{{ Vehicle.make }}"?</p>
-      <button class="btn btn-danger ml-2" type="submit">Confirm</button>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Delete">
+        <a href="{% url 'vehicle_list' %} ">Cancel</a>
     </form>
-{% endblock content %}
+
+{% endblock %}

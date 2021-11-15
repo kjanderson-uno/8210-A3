@@ -3,18 +3,27 @@
 {% block title %}Vehicles{% endblock title %}
 
 {% block content %}
-  {% for vehicle in object_list %}
-    <div class="card">
-      <div class="card-header">
-        <span class="font-weight-bold">Year: {{vehicle.year_manufactured}}</span>
-        <span class="font-weight-bold">Make: {{ vehicle.make }} | </span>
-        <span class="font-weight-bold">Model: {{ vehicle.model }} | </span>
+  {% if user.is_authenticated %}
+    {% for vehicle in object_list %}
+      <div class="card">
+        <div class="card-header" >
+          <span class="font-weight-bold">Year: {{vehicle.year_manufactured}}</span>
+          <span class="font-weight-bold">Make: {{ vehicle.make }} | </span>
+          <span class="font-weight-bold">Model: {{ vehicle.model }} | </span>
 
-        <span class="font-muted">Trim: {{ vehicle.trim }} | </span>
-        <span class="font-muted">Mileage: {{ vehicle.mileage }} | </span>
-        <span class="font-muted">VIN: {{ vehicle.VIN }}</span>
+          <span class="font-muted">Trim: {{ vehicle.trim }} | </span>
+          <span class="font-muted">Mileage: {{ vehicle.mileage }} | </span>
+          <span class="font-muted">VIN: {{ vehicle.VIN }}</span>
+        </div>
+        <div>
+          <a href="{% url 'vehicle_edit' pk=vehicle.pk %}" class="btn btn-warning">Edit</a>
+          <a href="{% url 'vehicle_delete' pk=vehicle.pk %}"
+             onclick="return confirm('Are you sure you want to delete the {{ vehicle.year_manufactured }} ' +
+              '{{ vehicle.make }} {{ vehicle.model }} with VIN: {{ vehicle.VIN }}?')"
+                class="btn btn-danger">Delete</a>
+        </div>
       </div>
-    </div>
-    <br />
-  {% endfor %}
+      <br />
+    {% endfor %}
+  {% endif %}
 {% endblock content %}
